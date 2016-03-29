@@ -1,0 +1,29 @@
+{
+  "name": "react-highlighted-text",
+  "version": "0.0.1",
+  "description": "React components to highlight text",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "React",
+    "table",
+    "highlighted",
+    "text"
+  ],
+  "author": "Qinec Ltd",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.2.0",
+    "eslint": "^2.5.1"
+  },
+  "dependencies": {
+    "react-highlighter": "^0.3.1"
+  },
+  "peerDependencies": {
+    "react": "^0.14.7",
+    "react-dom": "^0.14.7"
+  }
+}
