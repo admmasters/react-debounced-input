@@ -1,0 +1,33 @@
+{
+  "name": "react-debounced-input",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@bitbucket.org:mrevell82/react-debounced-input.git"
+  },
+  "keywords": [],
+  "author": "Qinec Ltd",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.7.4",
+    "babel-eslint": "^6.0.0",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "chai": "^3.5.0",
+    "enzyme": "^2.2.0",
+    "eslint": "^2.5.3",
+    "eslint-config-airbnb": "^6.2.0",
+    "eslint-plugin-react": "^4.2.3",
+    "mocha": "^2.4.5"
+  },
+  "peerDependencies": {
+    "react": "^0.14.7"
+  }
+}
