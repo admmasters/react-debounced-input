@@ -1,8 +1,8 @@
 {
   "name": "react-debounced-input",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
-  "main": "./dist/ReactDebouncedInput-v0.0.3.js",
+  "main": "./dist/ReactDebouncedInput-v0.0.4.js",
   "scripts": {
     "test": "test",
     "dist": "rm -rf dist/* && ./node_modules/.bin/webpack"
