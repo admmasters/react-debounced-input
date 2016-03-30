@@ -18,7 +18,7 @@ export default class TextInputBox extends Component {
 
   clearTimeout() {
     if (this.state.timeoutId) {
-      global.clearTimeout(this.state.timeoutId);
+      window.clearTimeout(this.state.timeoutId);
       this.state.timeoutId = null;
     }
   }
@@ -33,7 +33,7 @@ export default class TextInputBox extends Component {
     }
 
     this.clearTimeout();
-    const timeoutId = global.setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       if (typeof this.props.onDebounce === 'function') {
         this.props.onDebounce();
       }

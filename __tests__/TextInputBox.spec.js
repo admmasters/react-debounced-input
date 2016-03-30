@@ -4,7 +4,7 @@ import { setupChai, setupJSDOM } from 'qinec-shared/utils/test-utils';
 import React from 'react';
 import chai, { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
-import TextInputBox from '../index';
+import TextInputBox from '../lib/index';
 
 setupJSDOM();
 setupChai(chai);
