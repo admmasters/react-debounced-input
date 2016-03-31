@@ -2,11 +2,6 @@ import React from 'react';
 const { Component, PropTypes } = React;
 
 export default class TextInputBox extends Component {
-  state: {
-    timeoutId: ?number,
-    value: string,
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +22,7 @@ export default class TextInputBox extends Component {
     this.clearTimeout();
   }
 
-  handleChange(newText: string, debouncePeriod: number) {
+  handleChange(newText, debouncePeriod) {
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(newText);
     }
