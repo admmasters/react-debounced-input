@@ -1,15 +1,14 @@
-/* @flow */
 /* global describe, it*/
-import { setupChai, setupJSDOM } from 'qinec-shared/utils/test-utils';
 import React from 'react';
 import chai, { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
-import TextInputBox from '../lib/index';
-
-setupJSDOM();
-setupChai(chai);
+import TextInputBox from '../src';
+import jsDom from 'mocha-jsdom';
 
 describe('<TextInputBox />', () => {
+  jsDom();
+
+
   it('should render a text input box', () => {
     const onChange = text => text;
     const wrapper = shallow(<TextInputBox onChange={onChange} />);
