@@ -1,13 +1,20 @@
-import React from 'react';
-const { Component, PropTypes } = React;
+import * as React from 'react';
 
-export default class TextInputBox extends Component {
-  state: {
-    timeoutId: ?number,
-    value: string,
-  };
+export interface PropTypes {
+  type: string;
+  onChange: (value: string) => void;
+  onDebounce: () => void;
+  placeholder: string,
+  debounce: number,
+}
 
-  constructor(props) {
+export interface State {
+  timeoutId?: any;
+  value: string;
+}
+
+export default class TextInputBox extends React.Component <PropTypes, State> {
+  constructor(props: PropTypes) {
     super(props);
     this.state = {
       timeoutId: null,
@@ -27,7 +34,7 @@ export default class TextInputBox extends Component {
     this.clearTimeout();
   }
 
-  handleChange(newText: string, debouncePeriod: number) {
+  handleChange(newText:string, debouncePeriod:number) {
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(newText);
     }
@@ -46,8 +53,7 @@ export default class TextInputBox extends Component {
   }
 
   render() {
-    const { placeholder, debounce } = this.props;
-    const handleChange = event => this.handleChange(event.target.value, debounce);
+    const handleChange = event => this.handleChange(event.target.value, this.props.debounce);
 
     return (
       <div className="text-input-box-container">
@@ -56,21 +62,9 @@ export default class TextInputBox extends Component {
           className="text-input-box"
           value={ this.state.value }
           onChange={ handleChange }
-          placeholder={ placeholder }
+          placeholder={ this.props.placeholder }
         />
       </div>
     );
   }
 }
-
-TextInputBox.defaultProps = {
-  type: 'text',
-};
-
-TextInputBox.propTypes = {
-  type: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  debounce: PropTypes.number,
-  onDebounce: PropTypes.func,
-  placeholder: PropTypes.string,
-};
