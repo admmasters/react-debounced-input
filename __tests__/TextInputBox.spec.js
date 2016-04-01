@@ -8,25 +8,28 @@ import jsDom from 'mocha-jsdom';
 describe('<TextInputBox />', () => {
   jsDom();
 
-
-  it('should render a text input box', () => {
+  it('should render an empty text input box', () => {
     const onChange = text => text;
     const wrapper = shallow(<TextInputBox onChange={onChange} />);
-    const expected = '<div class="text-input-box-container"><input type="text" class="text-input-box" value=""/></div>';
+    const expected = '<input type="text" value=""/>';
     const actual = wrapper.html();
     expect(actual).to.contain(expected);
   });
+
   it('should have optional placeholder text', () => {
     const wrapper = shallow(<TextInputBox placeholder="Placeholder" />);
-    const expected = '<input type="text" class="text-input-box" value="" placeholder="Placeholder"/>';
+    const expected = 'placeholder="Placeholder"';
     const actual = wrapper.html();
     expect(actual).to.contain(expected);
   });
-  it('renders `.text-input-box`', () => {
-    const wrapper = shallow(<TextInputBox />);
-    const expected = '.text-input-box';
-    expect(wrapper.find(expected)).to.have.length(1);
+
+  it('should be able to have its class set', () => {
+    const wrapper = shallow(<TextInputBox className="test-class" />);
+    const expected = 'class="test-class"';
+    const actual = wrapper.html();
+    expect(actual).to.contain(expected);
   });
+
   it('should capture text', done => {
     const onChange = text => {
       expect(text).to.equal('example');
@@ -35,6 +38,7 @@ describe('<TextInputBox />', () => {
     const wrapper = shallow(<TextInputBox onChange={onChange} />);
     wrapper.find('input').simulate('change', { target: { value: 'example' } });
   });
+
   it('should be able to return a debounced string', done => {
     let savedText = null;
     const onChange = (text) => { savedText = text; };
