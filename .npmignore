@@ -3,3 +3,4 @@ __tests__
 .idea
 .babelrc
 webpack
+examples
