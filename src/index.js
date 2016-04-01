@@ -45,15 +45,13 @@ export default class TextInputBox extends Component {
     const handleChange = event => this.handleChange(event.target.value, debounce);
 
     return (
-      <div className="text-input-box-container">
         <input
           type="text"
-          className="text-input-box"
+          className={ this.props.className }
           value={ this.state.value }
           onChange={ handleChange }
           placeholder={ placeholder }
         />
-      </div>
     );
   }
 }
@@ -68,4 +66,5 @@ TextInputBox.propTypes = {
   debounce: PropTypes.number,
   onDebounce: PropTypes.func,
   placeholder: PropTypes.string,
+  className: PropTypes.string,
 };
