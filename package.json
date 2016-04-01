@@ -1,8 +1,8 @@
 {
   "name": "react-debounced-input",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A React input component supporting debounce",
-  "main": "./dist/ReactDebouncedInput-v0.1.0.js",
+  "main": "./dist/ReactDebouncedInput-v0.1.1.js",
   "scripts": {
     "test": "mocha --compilers js:babel-register --require ignore-styles ./**/*.spec.js",
     "clean:build": "rm -rf dist/* && npm run build:dev && npm run build:prod",
