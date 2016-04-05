@@ -3,10 +3,9 @@ import Highlighter from 'react-highlighter';
 
 const highlightFunc = highlightedText => children => {
   if (Array.isArray(children)) {
-    const finalChildren = children.map(child => {
-      return React.createElement(child.type, null, highlightFunc(highlightedText)(child));
-    });
-    return finalChildren;
+    return children.map((child, i) => (
+      React.createElement(child.type, { key: `highlighted-child${i}` }, highlightFunc(highlightedText)(child))
+    ));
   } else if (typeof children === 'string') {
     return (
       <Highlighter search={highlightedText} matchClass="highlighted-text">
@@ -31,10 +30,7 @@ const HighlightText = ComposedComponent => {
     );
   };
   HighlightedText.propTypes = {
-    children: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.string,
-    ]),
+    children: PropTypes.node,
     highlightedText: PropTypes.string,
   };
   return HighlightedText;
