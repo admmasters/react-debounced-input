@@ -7,6 +7,10 @@ const MockText = props => (<div>
   { props.children }
 </div>);
 
+MockText.propTypes = {
+  children: PropTypes.node,
+};
+
 MockText.propTypes = { text: PropTypes.string };
 
 const HighlightedMockText = highlightedText(MockText);
@@ -16,7 +20,7 @@ describe('highlightedTextDecorator', () => {
     const wrapper = shallow(<HighlightedMockText highlightedText="Hello">Hello Example</HighlightedMockText>);
     expect(wrapper.html()).to.contain('<strong class="highlighted-text">Hello</strong>');
   });
-  
+
   it('should be able to handle nested blocks of text', () => {
     const wrapper = render(
       <HighlightedMockText highlightedText="Example">
