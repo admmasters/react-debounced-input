@@ -1,14 +1,15 @@
 {
   "name": "react-highlighted-text",
-  "version": "0.0.4",
+  "version": "0.0.54",
   "description": "React components to highlight text",
-  "main": "./dist/ReactHighlightedText-v0.0.4.js",
+  "main": "./dist/ReactHighlightedText-v0.0.54.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.examples.js",
     "test": "mocha --timeout 15000 --compilers js:babel-register --require ignore-styles ./**/*.spec.js -w",
     "clean:build": "rm -rf dist/* && npm run build:dev && npm run build:prod",
     "build:dev": "./node_modules/.bin/webpack --config ./webpack/webpack.dev.js",
-    "build:prod": "./node_modules/.bin/webpack --config ./webpack/webpack.prod.js"
+    "build:prod": "./node_modules/.bin/webpack --config ./webpack/webpack.prod.js",
+    "publish:new": "npm run clean:build && npm publish"
   },
   "keywords": [
     "React",
@@ -36,6 +37,8 @@
     "ignore-styles": "^1.2.0",
     "mocha": "^2.4.5",
     "react-addons-test-utils": "^0.14.8",
+    "react-standard-table": "^0.0.6",
+    "recompose": "^0.15.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.1"
@@ -44,7 +47,7 @@
     "react-highlighter": "^0.3.1"
   },
   "peerDependencies": {
-    "react": "^15.0.0-rc.2",
-    "react-dom": "^15.0.0-rc.2"
+    "react": "^15.0.0-0 || ^0.14.0",
+    "react-dom": "^15.0.0-0 || 0.14.0"
   }
 }
