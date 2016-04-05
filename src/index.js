@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import Highlighter from 'react-highlighter';
 
-
 const highlightFunc = highlightedText => children => {
   if (Array.isArray(children)) {
     const finalChildren = children.map(child => {
@@ -42,4 +41,3 @@ const HighlightText = ComposedComponent => {
 };
 
 export default HighlightText;
-

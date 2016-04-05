@@ -1,4 +1,13 @@
 .highlighted-text {
-    background-color: yellow;
-    color: black;
+  background-color: yellow;
+  color: black;
+}
+
+.list-table {
+  border: 1px solid black;
+}
+
+.highlighted-text {
+  background-color: yellow;
+  color: black;
 }
