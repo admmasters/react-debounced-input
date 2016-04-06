@@ -11,7 +11,7 @@
     "build:dev": "./node_modules/.bin/webpack --config ./webpack/webpack.dev.js",
     "build:prod": "./node_modules/.bin/webpack --config ./webpack/webpack.prod.js",
     "publish:new": "npm run clean:build && npm publish",
-    "republish": "npm run clean:build && npm unpublish react-standard-table --force && npm publish"
+    "republish": "npm run clean:build && npm unpublish react-highlighted-text --force && npm publish"
   },
   "keywords": [
     "React",
