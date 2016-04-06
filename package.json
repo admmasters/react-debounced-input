@@ -1,8 +1,8 @@
 {
   "name": "react-highlighted-text",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "React components to highlight text",
-  "main": "./dist/ReactHighlightedText-v0.0.6.js",
+  "main": "./dist/ReactHighlightedText-v0.0.7.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --config ./webpack/webpack.examples.js",
     "test": "mocha --timeout 15000 --compilers js:babel-register --require ignore-styles ./**/*.spec.js -w",
