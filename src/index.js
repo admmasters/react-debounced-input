@@ -4,7 +4,7 @@ import Highlighter from 'react-highlighter';
 const highlightFunc = highlightedText => children => {
   if (Array.isArray(children)) {
     return children.map((child, i) => (
-      React.createElement(child.type, { key: `highlighted-child${i}` }, highlightFunc(highlightedText)(child))
+      React.createElement(child.type, { key: `highlighted-child${i}`, ...child.props }, highlightFunc(highlightedText)(child))
     ));
   } else if (typeof children === 'string') {
     return (
