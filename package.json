@@ -19,7 +19,7 @@
     "highlighted",
     "text"
   ],
-  "author": "Qinec Ltd",
+  "author": "Matt Revell",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.6.5",
