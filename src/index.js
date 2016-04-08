@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import Highlighter from 'react-highlighter';
+import Highlighter from './react-highlighter';
 
 // TODO: Correctly generate a unique key as we are using index which is an anti-pattern
 const highlightFunc = (highlightedText, matchClass) => children => {
