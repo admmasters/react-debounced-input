@@ -19,5 +19,8 @@ ReactDOM.render(
   <HighlightedApp
     highlightedText="Example"
   >
-    This is an Example of highlighted text
+    <div>
+      This is an Example of highlighted text
+      <div>This is another Example of highlighted text</div>
+    </div>
   </HighlightedApp>, document.getElementById('app'));
