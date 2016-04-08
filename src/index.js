@@ -1,11 +1,18 @@
 import React, { PropTypes } from 'react';
 import Highlighter from 'react-highlighter';
 
+// TODO: Correctly generate a unique key as we are using index which is an anti-pattern
 const highlightFunc = (highlightedText, matchClass) => children => {
+  const finalHighlightFunc = highlightFunc(highlightedText, matchClass);
   if (Array.isArray(children)) {
-    return children.map((child, i) => (
-      React.createElement(child.type, { key: `highlighted-child${i}`, ...child.props }, highlightFunc(highlightedText)(child))
-    ));
+    return children.map((child, i) => {
+      if (typeof child === 'string') {
+        return finalHighlightFunc(child);
+      }
+      return (
+        React.createElement(child.type, { key: `highlighted-child${i}`, ...child.props }, finalHighlightFunc(child))
+      );
+    });
   } else if (typeof children === 'string') {
     return (
       <Highlighter search={highlightedText} matchClass={ matchClass }>
@@ -13,19 +20,19 @@ const highlightFunc = (highlightedText, matchClass) => children => {
       </Highlighter>
     );
   }
-  return highlightFunc(highlightedText)(children.props.children);
+  return finalHighlightFunc(children.props.children);
 };
 
 const HighlightText = ComposedComponent => {
   const HighlightedText = props => {
     const { children, highlightedText, matchClass, ...other } = props;
-    if (!props.highlightedText || props.highlightedText.length === 0 || !children || children.length === 0) {
+    if (!highlightedText || highlightedText.length === 0 || !children || children.length === 0) {
       return <ComposedComponent { ...props } />;
     }
-    const highlightedChildren = highlightFunc(highlightedText, matchClass)(children);
+    const highlightedChildren = highlightFunc(highlightedText, matchClass);
     return (
       <ComposedComponent { ...other }>
-        { highlightedChildren }
+        { highlightedChildren(children) }
       </ComposedComponent>
     );
   };
