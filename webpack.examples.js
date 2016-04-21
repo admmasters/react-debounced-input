@@ -1,21 +1,17 @@
 const webpack = require('webpack');
-const baseConfig = require('./webpack.base.js');
+const path = require('path');
+const baseConfig = require('./webpack.config');
 
 module.exports = Object.assign({}, baseConfig, {
-  entry: './examples/index',
+  entry: './examples/index.tsx',
   devServer: {
     contentBase: './examples/',
     stats: { colors: true },
     hot: true,
     inline: true,
   },
+  output: 'bundle.js',
   devtool: 'cheap-module-inline-source-map',
-  output: Object.assign(baseConfig.output, {
-    path: './examples/',
-    filename: 'bundle.js',
-    libraryTarget: 'var',
-  }),
-  externals: {},
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
   ],
