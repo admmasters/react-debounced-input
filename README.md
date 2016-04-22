@@ -1,10 +1,8 @@
 A highlighted text higher order component for use with [React](https://facebook.github.io/react/ "React").
 <p>
-<b>New version: 0.1.0</b>
+<b>New version: 0.2.0-rc</b>
 <ul>
-  <li>React 15.x compatibility</li>
-  <li>Fix a packaging issue</li>
-  <li>Fix more issues with highlighting children</li>
+  <li>Converted to Typescript</li>
 </ul>
 <b>React-highlighted-text</b> is an open-source component designed to be used in situations where you need to highlight some text in one of the child components.
 This was built as a wrapper on react-highlighter that better served the needs of our project.

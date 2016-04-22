@@ -1,7 +1,6 @@
 __tests__
 .idea
 /npm-debug.log
-.babelrc
 src
 webpack
 examples
