@@ -4,6 +4,7 @@
   "description": "React components to highlight text",
   "main": "index.js",
   "scripts": {
+    "postinstall": "tsc",
     "test": "ava --watch --verbose && tsc -w",
     "dev": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info --content-base examples/"
   },
