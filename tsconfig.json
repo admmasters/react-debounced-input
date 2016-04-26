@@ -1,34 +1,20 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "isolatedModules": false,
-    "jsx": "react",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "declaration": false,
-    "noImplicitAny": false,
-    "removeComments": true,
-    "noLib": false,
-    "preserveConstEnums": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "sourceMap": true
-  },
   "compileOnSave": false,
-  "files": [
-    "./examples/index.tsx",
-    "./src/index.tsx",
-    "./typings/browser.d.ts",
-    "./src/__tests__/index.spec.tsx"
-  ],
-  "filesGlob": [
-    "**/**/*.ts",
-    "**/**/*.tsx",
-    "**/**/*.spec.ts",
-    "**/**/*.spec.tsx",
-    "!node_modules/**",
-    "!dist/*.js.map",
-    "!dist/*.js",
-    "!mock-server/**"
+  "buildOnSave": false,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "removeComments": false,
+    "sourceMap": false,
+    "jsx": "react",
+    "outDir": "js"
+  },
+  "exclude": [
+    "node_modules",
+    "typings/main",
+    "typings/main.d.ts"
   ]
 }
