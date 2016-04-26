@@ -1,10 +1,11 @@
 {
   "name": "react-highlighted-text",
-  "version": "0.0.3",
+  "version": "0.0.3-rc1",
   "description": "React components to highlight text",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "ava --watch --verbose && tsc -w",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info --content-base examples/"
   },
   "repository": {
     "type": "git",
@@ -21,5 +22,48 @@
   "bugs": {
     "url": "https://github.com/admmasters/react-highlighted-text/issues"
   },
-  "homepage": "https://github.com/admmasters/react-highlighted-text#readme"
+  "homepage": "https://github.com/admmasters/react-highlighted-text#readme",
+  "devDependencies": {
+    "ava": "^0.14.0",
+    "chai": "^3.5.0",
+    "cross-env": "^1.0.7",
+    "css-loader": "^0.23.1",
+    "enzyme": "^2.2.0",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.16.0",
+    "jquery": "^2.2.3",
+    "mocha": "^2.4.5",
+    "path": "^0.12.7",
+    "raw-loader": "^0.5.1",
+    "react-addons-test-utils": "^15.0.1",
+    "style-loader": "^0.13.1",
+    "tape": "^4.5.1",
+    "ts-loader": "^0.8.2",
+    "tslint": "^3.8.1",
+    "typescript": "^1.8.10",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
+  },
+  "dependencies": {
+    "escape-string-regexp": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  },
+  "ava": {
+    "files": [
+      "js/**/**/*.test.js"
+    ],
+    "source": [
+      "js/**/*.test.{js,jsx}"
+    ],
+    "failFast": true,
+    "tap": true,
+    "require": [
+      "./test/helpers/setup-browser-env.js"
+    ]
+  }
 }
