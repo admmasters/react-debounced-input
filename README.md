@@ -1,6 +1,6 @@
 A highlighted text higher order component for use with [React](https://facebook.github.io/react/ "React").
 <p>
-<b>New version: 0.3.0-rc2</b>
+<b>New version: 1.0.0</b>
 <ul>
   <li>Minor bug fixes and performance improvements</li>
 </ul>
