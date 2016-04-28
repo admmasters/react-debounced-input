@@ -1,8 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as  React from 'react';
+import * as ReactDOM from 'react-dom';
 import TextInputBox from '../src/index';
 
-class BasicExample extends React.Component {
+interface BasicExampleState {
+  text: string;
+  debouncedText: string;
+  value: string;
+}
+
+class BasicExample extends React.Component<{}, BasicExampleState> {
   constructor(props) {
     super(props);
 
@@ -12,19 +18,23 @@ class BasicExample extends React.Component {
     this.state = {
       text: '',
       debouncedText: '',
+      value: '',
     };
   }
 
-  handleChangeText(text) {
+  handleChangeText(text: string) {
+
     this.setState({
       text,
+      debouncedText: this.state.debouncedText,
+      value: this.state.value,
     });
   }
 
   handleDebounceText() {
     this.setState({
       debouncedText: this.state.text,
-    });
+    } as BasicExampleState);
   }
 
   render() {
@@ -35,6 +45,7 @@ class BasicExample extends React.Component {
           onChange={ this.handleChangeText }
           onDebounce={ this.handleDebounceText }
           debounce={ 1000 }
+          value={ this.state.value }
         />
         <div>
           <label>Text: { this.state.text }</label>

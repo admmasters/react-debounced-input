@@ -1,8 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 const { Component, PropTypes } = React;
 
-export default class TextInputBox extends Component {
-  constructor(props) {
+interface TextInputPropTypes {
+  type?: string;
+  value: string;
+  onChange?: (text: string) => void;
+  debounce?: number;
+  onDebounce?: () => void;
+  placeholder?: string;
+  className?: string;
+}
+
+interface TextInputBoxState {
+  timeoutId?: number,
+  value: string,
+}
+
+export default class TextInputBox extends Component<TextInputPropTypes, TextInputBoxState > {
+  constructor(props: TextInputPropTypes) {
     super(props);
     this.state = {
       timeoutId: null,
@@ -22,7 +37,7 @@ export default class TextInputBox extends Component {
     this.clearTimeout();
   }
 
-  handleChange(newText, debouncePeriod) {
+  handleChange(newText: string, debouncePeriod = 0) {
     if (typeof this.props.onChange === 'function') {
       this.props.onChange(newText);
     }
@@ -46,7 +61,7 @@ export default class TextInputBox extends Component {
 
     return (
         <input
-          type="text"
+          type={ this.props.type || 'text' }
           className={ this.props.className }
           value={ this.state.value }
           onChange={ handleChange }
@@ -55,16 +70,3 @@ export default class TextInputBox extends Component {
     );
   }
 }
-
-TextInputBox.defaultProps = {
-  type: 'text',
-};
-
-TextInputBox.propTypes = {
-  type: PropTypes.string.isRequired,
-  onChange: PropTypes.func,
-  debounce: PropTypes.number,
-  onDebounce: PropTypes.func,
-  placeholder: PropTypes.string,
-  className: PropTypes.string,
-};
