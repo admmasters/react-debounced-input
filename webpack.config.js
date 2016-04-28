@@ -51,12 +51,7 @@ const plugins = basePlugins
   .concat(process.env.NODE_ENV === 'production' ? prodPlugins : [])
   .concat(process.env.NODE_ENV === 'development' ? examplePlugins : []);
 
-const devtool = () => {
-  switch(process.env.NODE_ENV) {
-    case 'production': 'cheap-module-source-map';
-    default: 'source-map';
-  }
-}
+const devtool = process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'source-map';
 
 const devOutput = {
   path: path.join(__dirname, 'dist'),
@@ -74,13 +69,13 @@ const prodOutput = {
   libraryTarget: "umd",
 };
 
-const output = () => process.env.NODE_ENV === 'production' ? prodOutput : devOutput;
+const output = process.env.NODE_ENV === 'production' ? prodOutput : devOutput;
 
 module.exports = {
   entry,
   externals,
-  output: output(),
-  devtool: devtool(),
+  output,
+  devtool,
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js']
   },
