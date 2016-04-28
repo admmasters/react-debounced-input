@@ -2,5 +2,11 @@
   "ambientDependencies": {
     "react": "registry:dt/react#0.14.0+20160423065914",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040"
+  },
+  "ambientDevDependencies": {
+    "enzyme": "registry:dt/enzyme#1.2.0+20160324040416",
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
+    "jsdom": "registry:dt/jsdom#2.0.0+20160316155526",
+    "node": "registry:dt/node#4.0.0+20160423143914"
   }
 }
