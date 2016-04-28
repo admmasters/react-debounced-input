@@ -5,7 +5,6 @@ import TextInputBox from '../src/index';
 interface BasicExampleState {
   text: string;
   debouncedText: string;
-  value: string;
 }
 
 class BasicExample extends React.Component<{}, BasicExampleState> {
@@ -18,7 +17,6 @@ class BasicExample extends React.Component<{}, BasicExampleState> {
     this.state = {
       text: '',
       debouncedText: '',
-      value: '',
     };
   }
 
@@ -27,7 +25,6 @@ class BasicExample extends React.Component<{}, BasicExampleState> {
     this.setState({
       text,
       debouncedText: this.state.debouncedText,
-      value: this.state.value,
     });
   }
 
@@ -45,7 +42,7 @@ class BasicExample extends React.Component<{}, BasicExampleState> {
           onChange={ this.handleChangeText }
           onDebounce={ this.handleDebounceText }
           debounce={ 1000 }
-          value={ this.state.value }
+          value={ this.state.text }
         />
         <div>
           <label>Text: { this.state.text }</label>
