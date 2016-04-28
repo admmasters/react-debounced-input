@@ -4,17 +4,28 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const loaders = require('./webpack/loaders');
+const packageName = 'ReactHighlightedText';
+const exampleAppEntries = ['./examples/index.tsx'];
 
-const baseAppEntries = [
-  './examples/index.tsx',
-];
+const entry = process.env.NODE_ENV === 'production' ?
+  './src/index.tsx' :
+  {
+    app: exampleAppEntries,
+    vendor: [
+      'react'
+    ]
+  };
+
+const externals =
+  process.env.NODE_ENV === 'production' ? {
+    'react': 'react',
+  } : [];
 
 const basePlugins = [
   new webpack.DefinePlugin({
     __DEV__: process.env.NODE_ENV !== 'production',
     'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
   }),
-  new webpack.optimize.CommonsChunkPlugin('vendor', '[name].[hash].js'),
 ];
 
 const examplePlugins = [
@@ -23,6 +34,7 @@ const examplePlugins = [
     inject: 'body'
   }),
   new webpack.NoErrorsPlugin(),
+  new webpack.optimize.CommonsChunkPlugin('vendor', '[name].[hash].js'),
 ];
 
 const prodPlugins = [
@@ -30,39 +42,49 @@ const prodPlugins = [
     compress: {
       warnings: false
     }
-  })
+  }),
+  new webpack.optimize.DedupePlugin(),
+  new webpack.optimize.OccurenceOrderPlugin(),
 ];
 
 const plugins = basePlugins
   .concat(process.env.NODE_ENV === 'production' ? prodPlugins : [])
   .concat(process.env.NODE_ENV === 'development' ? examplePlugins : []);
 
+const devtool = () => {
+  switch(process.env.NODE_ENV) {
+    case 'production': 'cheap-module-source-map';
+    default: 'source-map';
+  }
+}
+
+const devOutput = {
+  path: path.join(__dirname, 'dist'),
+  filename: '[name].[hash].js',
+  publicPath: '/',
+  sourceMapFilename: '[name].[hash].js.map',
+  chunkFilename: '[id].chunk.js'
+};
+
+const prodOutput = {
+  path: path.join(__dirname, 'dist'),
+  filename: `${packageName}.js`,
+  pathinfo: true,
+  sourcePrefix: '',
+  libraryTarget: "umd",
+};
+
+const output = () => process.env.NODE_ENV === 'production' ? prodOutput : devOutput;
+
 module.exports = {
-
-  entry: {
-    app: baseAppEntries,
-    vendor: [
-      'react',
-      'react-dom',
-    ]
-  },
-
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: '[name].[hash].js',
-    publicPath: '/',
-    sourceMapFilename: '[name].[hash].js.map',
-    chunkFilename: '[id].chunk.js'
-  },
-
-  devtool: 'source-map',
-
+  entry,
+  externals,
+  output: output(),
+  devtool: devtool(),
   resolve: {
     extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js']
   },
-
-  plugins: plugins,
-
+  plugins,
   module: {
     loaders: [
       loaders.tsx,
@@ -75,5 +97,4 @@ module.exports = {
       loaders.ttf,
     ]
   },
-
 };
