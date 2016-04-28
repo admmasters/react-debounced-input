@@ -4,7 +4,10 @@
   "description": "A React input component supporting debounce",
   "main": "./dist/ReactDebouncedInput.js",
   "scripts": {
+    "postinstall": "tsc",
     "dev": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info --content-base examples/",
+    "test": "cross-env tsc && ava",
+    "test:watch": "ava --watch --verbose && tsc -w",
     "clean:build": "rm -rf dist/* && npm run build:prod",
     "build:prod": "cross-env NODE_ENV=production webpack -p"
   },
@@ -21,10 +24,14 @@
   "author": "Matt Revell",
   "license": "MIT",
   "devDependencies": {
+    "ava": "^0.14.0",
     "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
+    "enzyme": "^2.2.0",
     "html-webpack-plugin": "^2.16.0",
     "ignore-styles": "^1.2.0",
+    "jquery": "^2.2.3",
+    "jsdom": "^8.4.1",
     "path": "^0.12.7",
     "raw-loader": "^0.5.1",
     "style-loader": "^0.13.1",
@@ -39,5 +46,19 @@
   "peerDependencies": {
     "react": ">=0.14.0",
     "react-dom": ">=0.14.0"
-  }
+  },
+  "ava": {
+    "files": [
+      "js/**/**/*.test.js"
+    ],
+    "source": [
+      "js/**/*.test.{js,jsx}"
+    ],
+    "failFast": true,
+    "tap": true,
+    "require": [
+      "./test/helpers/setup-browser-env.js"
+    ]
+  },
+  "typings": "./index.d.ts"
 }
