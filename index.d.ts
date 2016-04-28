@@ -1,9 +1,10 @@
-import { ComponentClass, ReactNode } from 'react';
+import * as React from 'react';
 
-interface HighlightedProps {
-  children?: ReactNode;
-  highlightedText: string;
-  matchClass?: string;
+export interface HighlightedTextPropTypes {
+    children?: React.ReactNode;
+    highlightedText: string;
+    matchClass?: string;
 }
 
-export default function Highlighted<T>(InputTemplate: ComponentClass<T>): ComponentClass<T & HighlightedProps>
+declare const HighlightText: (ComposedComponent: any) => (props: HighlightedTextPropTypes) => any;
+export default HighlightText;
