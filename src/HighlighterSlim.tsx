@@ -11,8 +11,6 @@ interface ReactHighlighterProps {
 
 export default class ReactHighlighter extends React.Component<ReactHighlighterProps, {}> {
 
-  private count = 0;
-
   public constructor(props: ReactHighlighterProps, context: any) {
     super(props, context);
 
@@ -57,13 +55,19 @@ export default class ReactHighlighter extends React.Component<ReactHighlighterPr
     }
   }
 
+  private matchIndexKey(index: number): string {
+    return `match-index-${index}`;
+  }
+
   private highlightChildren(subject: string, search: RegExp) {
     const children = [];
     let remaining = subject;
+    let matchIndex = 0;
 
     while (remaining) {
+
       if (!search.test(remaining)) {
-        children.push(this.renderPlain(remaining));
+        children.push(this.renderPlain(remaining, this.matchIndexKey(matchIndex++)));
         return children;
       }
 
@@ -71,12 +75,12 @@ export default class ReactHighlighter extends React.Component<ReactHighlighterPr
 
       const nonMatch = remaining.slice(0, boundaries.first);
       if (nonMatch) {
-        children.push(this.renderPlain(nonMatch));
+        children.push(this.renderPlain(nonMatch, this.matchIndexKey(matchIndex++)));
       }
 
       const match = remaining.slice(boundaries.first, boundaries.last);
       if (match) {
-        children.push(this.renderHighlight(match));
+        children.push(this.renderHighlight(match, this.matchIndexKey(matchIndex++)));
       }
       remaining = remaining.slice(boundaries.last);
     }
@@ -84,15 +88,13 @@ export default class ReactHighlighter extends React.Component<ReactHighlighterPr
     return children;
   }
 
-  private renderPlain(plainString: string) {
-    this.count++;
-    return <span key={`highlighter-span-${this.count}`}>{plainString}</span>;
+  private renderPlain(plainString: string, key: string) {
+    return <span key={key}>{plainString}</span>;
   }
 
-  private renderHighlight(matchString: string) {
-    this.count++;
+  private renderHighlight(matchString: string, key: string) {
     return React.DOM[this.props.matchElement || 'strong']({
-      key: this.count,
+      key,
       className: this.props.matchClass || 'highlight',
       style: this.props.matchStyle || {},
     }, matchString);
