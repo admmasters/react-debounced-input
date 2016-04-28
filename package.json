@@ -1,65 +1,72 @@
 {
   "name": "react-highlighted-text",
-  "version": "0.2.0-rc",
+  "version": "0.0.3-rc2",
   "description": "React components to highlight text",
-  "main": "./dist/ReactHighlightedText.js",
+  "main": "dist/ReactHighlightedText.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.examples.js",
-    "test2": "mocha --timeout 15000 --compilers js:babel-register --require ignore-styles ./**/*.spec.js",
-    "test": "karma start karma.conf.js",
-    "test:watch": "npm test -- -w",
-    "clean:build": "rm -rf dist/* && npm run build:prod",
-    "build:dev": "webpack",
-    "build:prod": "webpack --config webpack.prod.js",
-    "publish:new": "npm run clean:build && npm publish",
-    "republish": "npm run clean:build && npm unpublish react-highlighted-text --force && npm publish"
+    "postinstall": "tsc",
+    "build": "cross-env NODE_ENV=production webpack -p",
+    "test": "ava --watch --verbose && tsc -w",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info --content-base examples/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/admmasters/react-highlighted-text.git"
   },
   "keywords": [
-    "React",
-    "table",
+    "react",
     "highlighted",
-    "text"
+    "text",
+    "hilighter"
   ],
-  "author": "Matt Revell",
+  "author": "Mr Matt Revell",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/admmasters/react-highlighted-text/issues"
+  },
+  "homepage": "https://github.com/admmasters/react-highlighted-text#readme",
   "devDependencies": {
+    "ava": "^0.14.0",
     "chai": "^3.5.0",
+    "cross-env": "^1.0.7",
     "css-loader": "^0.23.1",
     "enzyme": "^2.2.0",
-    "eslint": "^2.6.0",
-    "eslint-config-airbnb": "^6.2.0",
-    "eslint-plugin-import": "^1.4.0",
-    "eslint-plugin-react": "^4.2.3",
-    "ignore-styles": "^1.2.0",
-    "jasmine-core": "^2.4.1",
-    "jasmine-expect-jsx": "^1.1.0",
-    "karma": "^0.13.22",
-    "karma-chrome-launcher": "^0.2.3",
-    "karma-jasmine": "^0.3.8",
-    "karma-mocha": "^0.2.2",
-    "karma-phantomjs-launcher": "^1.0.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.7.0",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^2.16.0",
+    "jquery": "^2.2.3",
     "mocha": "^2.4.5",
-    "null-loader": "^0.1.1",
-    "phantomjs-prebuilt": "^2.1.7",
-    "react-addons-test-utils": "^0.14.8",
-    "react-select": "^1.0.0-beta12",
-    "react-standard-table": "^0.0.6",
-    "recompose": "^0.15.1",
+    "path": "^0.12.7",
+    "raw-loader": "^0.5.1",
+    "react-addons-test-utils": "^15.0.1",
     "style-loader": "^0.13.1",
+    "tape": "^4.5.1",
     "ts-loader": "^0.8.2",
-    "tslint": "^3.7.4",
+    "tslint": "^3.8.1",
     "typescript": "^1.8.10",
-    "webpack": "1.13.0",
-    "webpack-config": "^4.0.0",
-    "webpack-dev-server": "^1.14.1"
-  },
-  "peerDependencies": {
-    "react": "^15.0.0-0 || ^0.14.0",
-    "react-dom": "^15.0.0-0 || 0.14.0"
+    "url-loader": "^0.5.7",
+    "webpack": "^1.13.0",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-hot-middleware": "^2.10.0"
   },
   "dependencies": {
-    "react-highlighter": "^0.3.1"
-  }
+    "escape-string-regexp": "^1.0.5"
+  },
+  "peerDependencies": {
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
+  },
+  "ava": {
+    "files": [
+      "js/**/**/*.test.js"
+    ],
+    "source": [
+      "js/**/*.test.{js,jsx}"
+    ],
+    "failFast": true,
+    "tap": true,
+    "require": [
+      "./test/helpers/setup-browser-env.js"
+    ]
+  },
+  "typings": "./index.d.ts"
 }

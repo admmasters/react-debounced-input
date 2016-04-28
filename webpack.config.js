@@ -1,37 +1,95 @@
-const webpack = require('webpack');
+'use strict';
+
 const path = require('path');
-const nodeModulesDir = path.resolve(__dirname, 'node_modules');
-const loaders = [
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const loaders = require('./webpack/loaders');
+const packageName = 'ReactHighlightedText';
+const exampleAppEntries = ['./examples/index.tsx'];
+
+const entry = process.env.NODE_ENV === 'production' ?
+  './src/index.tsx' :
   {
-    test: /\.tsx?$/,
-    loader: 'ts-loader',
-    exclude: [nodeModulesDir],
-  },
-  { test: /\.css$/, loader: 'style!css' },
-  { test: /\.scss$/, loaders: ['style', 'css', 'sass'] },
+    app: exampleAppEntries,
+    vendor: [
+      'react'
+    ]
+  };
+
+const externals =
+  process.env.NODE_ENV === 'production' ? {
+    'react': 'react',
+  } : [];
+
+const basePlugins = [
+  new webpack.DefinePlugin({
+    __DEV__: process.env.NODE_ENV !== 'production',
+    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+  }),
 ];
 
+const examplePlugins = [
+  new HtmlWebpackPlugin({
+    template: './examples/index.html',
+    inject: 'body'
+  }),
+  new webpack.NoErrorsPlugin(),
+  new webpack.optimize.CommonsChunkPlugin('vendor', '[name].[hash].js'),
+];
+
+const prodPlugins = [
+  new webpack.optimize.UglifyJsPlugin({
+    compress: {
+      warnings: false
+    }
+  }),
+  new webpack.optimize.DedupePlugin(),
+  new webpack.optimize.OccurenceOrderPlugin(),
+];
+
+const plugins = basePlugins
+  .concat(process.env.NODE_ENV === 'production' ? prodPlugins : [])
+  .concat(process.env.NODE_ENV === 'development' ? examplePlugins : []);
+
+const devtool = process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'source-map';
+
+const devOutput = {
+  path: path.join(__dirname, 'dist'),
+  filename: '[name].[hash].js',
+  publicPath: '/',
+  sourceMapFilename: '[name].[hash].js.map',
+  chunkFilename: '[id].chunk.js'
+};
+
+const prodOutput = {
+  path: path.join(__dirname, 'dist'),
+  filename: `${packageName}.js`,
+  pathinfo: true,
+  sourcePrefix: '',
+  libraryTarget: "umd",
+};
+
+const output = process.env.NODE_ENV === 'production' ? prodOutput : devOutput;
+
 module.exports = {
-  module: {
-    loaders,
-  },
-  devtool: 'source-map',
-  entry: {
-    'app': path.resolve(__dirname, './src/index'),
-    'vendors': ['react', 'react-dom'],
-  },
-  output: {
-    path: 'dist',
-    filename: '[name].js',
-  },
+  entry,
+  externals,
+  output,
+  devtool,
   resolve: {
-    extensions: ['', '.ts', '.tsx', '.js', '.jsx'],
+    extensions: ['', '.webpack.js', '.web.js', '.tsx', '.ts', '.js']
   },
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js', Infinity),
-    new webpack.DefinePlugin({
-      'process.env': { NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development') },
-      '__DEV__': process.env.NODE_ENV === 'development' ? 'true' : false,
-    })
-  ],
+  plugins,
+  module: {
+    loaders: [
+      loaders.tsx,
+      loaders.html,
+      loaders.css,
+      loaders.svg,
+      loaders.eot,
+      loaders.woff,
+      loaders.woff2,
+      loaders.ttf,
+    ]
+  },
 };

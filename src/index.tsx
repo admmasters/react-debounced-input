@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Highlighter from 'react-highlighter';
+import HighlighterSlim from './HighlighterSlim';
 
 interface HighlightedTextPropTypes {
   children?: React.ReactNode;
@@ -12,7 +12,7 @@ function isReactElement<T>(element: React.ReactElement<T> | React.ReactNode): el
 }
 
 function getType(element: { type: any }): string {
-  return element.type;
+  return element.type || '';
 }
 
 const highlightFunc = function highlightFunc(highlightedText: string, matchClass = 'react-highlighted-text') {
@@ -27,14 +27,19 @@ const highlightFunc = function highlightFunc(highlightedText: string, matchClass
           const newProps = Object.assign({}, { key: `highlighted-child${reactKey}`}, child.props);
           return React.createElement(getType(child), newProps, innerHighlightFunc(child));
         }
-      }
-      return element.map(mapper);
+      };
+      const arrayElement = element as Array<any>;
+      return arrayElement.map(mapper) as Array<any>;
     } else if (typeof element === 'string') {
       reactKey++;
       return (
-        <Highlighter search={highlightedText} matchClass={ matchClass } key={`highlighted-child${reactKey}`}>
+        <HighlighterSlim
+          search={highlightedText}
+          matchClass={ matchClass }
+          key={`highlighted-child${reactKey}`}
+        >
           { element }
-        </Highlighter>
+        </HighlighterSlim>
       );
     } else if (isReactElement<{children: Array<any>}>(element)) {
       return innerHighlightFunc(element.props.children);
