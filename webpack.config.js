@@ -52,7 +52,7 @@ const plugins = basePlugins
   .concat(process.env.NODE_ENV === 'production' ? prodPlugins : [])
   .concat(process.env.NODE_ENV === 'development' ? examplePlugins : []);
 
-const devtool = process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'source-map';
+const devtool = process.env.NODE_ENV === 'production' ? 'cheap-module-source-map' : 'eval';
 
 const devOutput = {
   path: path.join(__dirname, 'dist'),
