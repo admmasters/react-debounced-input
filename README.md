@@ -1,7 +1,8 @@
 A highlighted text higher order component for use with [React](https://facebook.github.io/react/ "React").
 <p>
-<b>New version: 1.0.1</b>
+<b>New version: 1.0.2</b>
 <ul>
+  <li>Fix typings</li>
   <li>Fix an issue with tsc being called postinstall</li>
   <li>Minor bug fixes and performance improvements</li>
 </ul>
