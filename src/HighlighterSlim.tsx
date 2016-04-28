@@ -1,7 +1,7 @@
 import * as React from 'react';
 const escapeStringRegexp = require('escape-string-regexp');
 
-interface ReactHighlighterProps {
+export interface ReactHighlighterProps {
   search?: string;
   caseSensitive?: boolean;
   matchElement?: string;

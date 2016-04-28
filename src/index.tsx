@@ -1,7 +1,7 @@
 import * as React from 'react';
 import HighlighterSlim from './HighlighterSlim';
 
-interface HighlightedTextPropTypes {
+export interface HighlightedTextPropTypes {
   children?: React.ReactNode;
   highlightedText: string;
   matchClass?: string;
