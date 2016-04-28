@@ -3,7 +3,7 @@ const { Component, PropTypes } = React;
 
 interface TextInputPropTypes {
   type?: string;
-  value: string;
+  value?: string;
   onChange?: (text: string) => void;
   debounce?: number;
   onDebounce?: () => void;
@@ -12,16 +12,14 @@ interface TextInputPropTypes {
 }
 
 interface TextInputBoxState {
-  timeoutId?: number,
-  value: string,
+  timeoutId?: number
 }
 
 export default class TextInputBox extends Component<TextInputPropTypes, TextInputBoxState > {
   constructor(props: TextInputPropTypes) {
     super(props);
     this.state = {
-      timeoutId: null,
-      value: '',
+      timeoutId: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -50,7 +48,6 @@ export default class TextInputBox extends Component<TextInputPropTypes, TextInpu
     }, debouncePeriod);
 
     this.setState({
-      value: newText,
       timeoutId,
     });
   }
@@ -63,7 +60,7 @@ export default class TextInputBox extends Component<TextInputPropTypes, TextInpu
         <input
           type={ this.props.type || 'text' }
           className={ this.props.className }
-          value={ this.state.value }
+          value={ this.props.value || '' }
           onChange={ handleChange }
           placeholder={ placeholder }
         />
