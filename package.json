@@ -1,6 +1,6 @@
 {
   "name": "react-highlighted-text",
-  "version": "0.0.3-rc1",
+  "version": "0.0.3-rc2",
   "description": "React components to highlight text",
   "main": "dist/ReactHighlightedText.js",
   "scripts": {
