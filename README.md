@@ -1,7 +1,9 @@
 A debounced input control built for use with [React](https://facebook.github.io/react/ "React").
 <p>
-<b>New version: 0.3.0</b><br />
-<b>React-debounced-input</b> is an open-source component designed to be used in situations where you need to debounce an input element in your React application. This is currently only tested with the text input type.
+<b>New version: 0.3.2</b><br />
+<ul>
+  <li>URGENT: This is now a controlled component - let us know if you want us to have the option of being non-controlled.</li>
+</ul>
 </p>
 
 <p>
