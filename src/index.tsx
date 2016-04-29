@@ -1,22 +1,13 @@
 import * as React from 'react';
+import { ReactDebouncedInputProps } from '../index';
 const { Component, PropTypes } = React;
-
-interface TextInputPropTypes {
-  type?: string;
-  value?: string;
-  onChange?: (text: string) => void;
-  debounce?: number;
-  onDebounce?: () => void;
-  placeholder?: string;
-  className?: string;
-}
 
 interface TextInputBoxState {
   timeoutId?: number
 }
 
-export default class TextInputBox extends Component<TextInputPropTypes, TextInputBoxState > {
-  constructor(props: TextInputPropTypes) {
+export default class TextInputBox extends Component<ReactDebouncedInputProps, TextInputBoxState > {
+  constructor(props: ReactDebouncedInputProps) {
     super(props);
     this.state = {
       timeoutId: null
