@@ -2,7 +2,7 @@ import { Component, Props } from 'react';
 
 export interface ReactDebouncedInputProps extends Props<ReactDebouncedInput> {
   type?: string;
-  value?: string;
+  value: string;
   onChange?: Function;
   debounce?: number;
   onDebounce?: Function;
