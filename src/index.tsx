@@ -2,23 +2,18 @@ import * as React from 'react';
 import { ReactDebouncedInputProps } from '../index';
 const { Component, PropTypes } = React;
 
-interface TextInputBoxState {
-  timeoutId?: number
-}
-
-export default class TextInputBox extends Component<ReactDebouncedInputProps, TextInputBoxState > {
+export default class TextInputBox extends Component<ReactDebouncedInputProps, {}> {
+  timeoutId: number;
   constructor(props: ReactDebouncedInputProps) {
     super(props);
-    this.state = {
-      timeoutId: null
-    };
+    this.clearTimeout = this.clearTimeout.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
-  clearTimeout() {
-    if (this.state.timeoutId) {
-      window.clearTimeout(this.state.timeoutId);
-      this.state.timeoutId = null;
+  clearTimeout(timeoutId?: number) {
+    if (this.timeoutId) {
+      window.clearTimeout(timeoutId);
+      this.timeoutId = null;
     }
   }
 
@@ -27,31 +22,27 @@ export default class TextInputBox extends Component<ReactDebouncedInputProps, Te
   }
 
   handleChange(newText: string, debouncePeriod = 0) {
-    if (typeof this.props.onChange === 'function') {
-      this.props.onChange(newText);
-    }
-
-    this.clearTimeout();
-    const timeoutId = window.setTimeout(() => {
+    clearTimeout(this.timeoutId);
+    this.timeoutId = window.setTimeout(() => {
       if (typeof this.props.onDebounce === 'function') {
-        this.props.onDebounce();
+        this.props.onDebounce(newText);
       }
     }, debouncePeriod);
 
-    this.setState({
-      timeoutId,
-    });
+    if (typeof this.props.onChange === 'function') {
+      this.props.onChange(newText);
+    }
   }
 
   render() {
-    const { placeholder, debounce } = this.props;
+    const { placeholder, debounce, type, className, value } = this.props;
     const handleChange = event => this.handleChange(event.target.value, debounce);
 
     return (
         <input
-          type={ this.props.type || 'text' }
-          className={ this.props.className }
-          value={ this.props.value || '' }
+          type={ type || 'text' }
+          className={ className }
+          value={ value || '' }
           onChange={ handleChange }
           placeholder={ placeholder }
         />
