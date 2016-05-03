@@ -1,10 +1,10 @@
 {
   "name": "react-debounced-input",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "A React input component supporting debounce",
   "main": "./dist/ReactDebouncedInput.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info --content-base examples/",
+    "start": "cross-env NODE_ENV=development webpack-dev-server -d --inline --hot --progress --no-info --content-base examples/",
     "test": "cross-env tsc && ava",
     "test:watch": "ava --watch --verbose && tsc -w",
     "clean:build": "rm -rf dist/* && npm run build:prod",
