@@ -1,8 +1,8 @@
 A debounced input control built for use with [React](https://facebook.github.io/react/ "React").
 <p>
-<b>New version: 0.3.2</b><br />
+<b>New version: 0.4.0</b><br />
 <ul>
-  <li>URGENT: This is now a controlled component - let us know if you want us to have the option of being non-controlled.</li>
+  <li>Now using an instance property on the component thanks to some feedback.</li>
 </ul>
 </p>
 
@@ -42,11 +42,11 @@ ReactDebouncedInput.propTypes = {
 <p>
 <b>Examples</b>
 <br />
-To run the example(s) clone the [repo](https://github.com/admmasters/react-debounced-input.git "repo") and then use NPM scripts to start a dev server at <b>http://localhost:8080/</b>:
+To run the example(s) clone the [repo](https://github.com/admmasters/react-debounced-input.git "repo") and then use NPM scripts to start a dev server
 <pre>
 <code>
 npm install
-npm start
+npm run dev
 </code>
 </pre>
 
