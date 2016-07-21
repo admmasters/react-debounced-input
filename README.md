@@ -2,7 +2,7 @@ A debounced input control built for use with [React](https://facebook.github.io/
 <p>
 <b>New version: 0.4.0</b><br />
 <ul>
-  <li>Now using an instance property on the component thanks to some feedback.</li>
+  <li>Now using an instance property to track timeout id to avoid needless re-render</li>
 </ul>
 </p>
 
