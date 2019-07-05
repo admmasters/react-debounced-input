@@ -1,3 +1,6 @@
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/admmasters/react-debounced-input.svg)](https://greenkeeper.io/)
+
 A debounced input control built for use with [React](https://facebook.github.io/react/ "React").
 <p>
 <b>New version: 0.4.0</b><br />
